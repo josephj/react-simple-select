@@ -1,5 +1,10 @@
 body {
+  color: #777;
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  padding: 10px;
+  font-family: "Open Sans", sans-serif;
+}
+label {
+  font-weight: bold;
+  font-size: 12px;
 }
