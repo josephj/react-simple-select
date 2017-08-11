@@ -62,6 +62,9 @@ class App extends Component {
           />
         </label>
 
+        <br/><br/>
+
+        <a href="https://bitbucket.org/josephj/morning-eyrie-25991/" target="_blank">View Source Code</a>
       </div>
     );
   }

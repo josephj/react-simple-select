@@ -107,7 +107,6 @@ class Select extends Component {
           const nextIndex = prevIndex - 1 >= 0 ? prevIndex - 1 : options.length - 1;
           newState = { highlightedValue: options[nextIndex].value };
         } else {
-          console.log(value);
           newState = { isMenuOpened: true, highlightedValue: value };
         }
         break;
