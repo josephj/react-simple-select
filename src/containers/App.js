@@ -28,10 +28,13 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Code Exercise</h1>
-          <a href="https://bitbucket.org/josephj/morning-eyrie-25991/" rel="noopener noreferrer" target="_blank">
-            View source code on Bitbucket
-          </a>
+          <h1>React Simple Select</h1>
+          <p>
+            Customisable opitons / Keyboard control / Accessbility. &nbsp;
+            (<a href="https://bitbucket.org/josephj/morning-eyrie-25991/" rel="noopener noreferrer" target="_blank">
+              View source code on Bitbucket
+            </a>)
+          </p>
         </header>
         <section>
           <label>Default Dropdown</label>

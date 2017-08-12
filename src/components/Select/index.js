@@ -88,7 +88,7 @@ class Select extends Component {
     switch (e.keyCode) {
       case 9: // Tab
         if (isMenuOpened) {
-          nextState = { isMenuOpened: false, isFocused: false, highlightedValue: -1 };
+          nextState = { isMenuOpened: false, isFocused: true, highlightedValue: -1 };
         }
         break;
       case 13: // Enter
@@ -139,6 +139,7 @@ class Select extends Component {
       role: 'combobox',
       'aria-controls': `${id}-results`,
       'aria-expanded': isMenuOpened,
+      'aria-selected': isFocused,
       'aria-haspopup': true,
       'aria-owns': `${id}-results`
     };
@@ -174,7 +175,7 @@ class Select extends Component {
         id={`${this.id}-result-${option.value}`}
         key={`option-${option.value}`}
         className={className}
-        role="treeitem"
+        role="option"
         aria-selected={value === option.value}
         onClick={this.onOptionClick.bind(this, option.value)}
         onMouseOver={this.onOptionHighlight.bind(this, option.value)}
@@ -202,7 +203,7 @@ class Select extends Component {
         {this.renderSelection()}
         <ul
           id={`${this.id}-results`}
-          role="tree"
+          role="listbox"
           className={cx(`${classPrefix}-dropdown`, { 'is-hidden': !isMenuOpened })}
           aria-expanded={isMenuOpened}
           aria-hidden={!isMenuOpened}
