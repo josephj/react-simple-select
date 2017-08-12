@@ -3,11 +3,11 @@ import Select from '../components/Select';
 import './App.css';
 import '../components/Select/style.css';
 
-const CustomOption = props => {
+const CustomOption = (option, props) => {
   return (
-    <span title={props.label}>
-      <span className="CustomSelect-dot" style={{ background: props.color }} />
-      {props.label}
+    <span {...props}>
+      <span className="CustomSelect-dot" style={{ background: option.color }} />
+      {option.label}
     </span>
   );
 };
@@ -30,8 +30,11 @@ class App extends Component {
         <header>
           <h1>React Simple Select</h1>
           <p>
-            Customisable opitons / Keyboard control / Accessbility. &nbsp;
-            (<a href="https://bitbucket.org/josephj/morning-eyrie-25991/" rel="noopener noreferrer" target="_blank">
+            Customisable opitons / Keyboard control / Accessbility. &nbsp; (<a
+              href="https://bitbucket.org/josephj/morning-eyrie-25991/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               View source code on Bitbucket
             </a>)
           </p>
@@ -46,7 +49,11 @@ class App extends Component {
               { value: '1', label: 'Option 1' },
               { value: '2', label: 'Option 2' },
               { value: '3', label: 'Option 3' },
-              { value: '4', label: 'Option 4' }
+              { value: '4', label: 'Option 4' },
+              {
+                value: '5',
+                label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut'
+              }
             ]}
           />
           <p>
@@ -70,7 +77,12 @@ class App extends Component {
               { value: '1', label: 'Option 1', color: '#aee28a' },
               { value: '2', label: 'Option 2', color: '#4e92df' },
               { value: '3', label: 'Option 3', color: '#f3a536' },
-              { value: '4', label: 'Option 4', color: '#fd7173' }
+              { value: '4', label: 'Option 4', color: '#fd7173' },
+              {
+                value: '5',
+                label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
+                color: 'blue'
+              }
             ]}
           />
           <p>
@@ -93,7 +105,11 @@ class App extends Component {
               { value: '1', label: 'Option 1', color: '#aee28a' },
               { value: '2', label: 'Option 2', color: '#4e92df' },
               { value: '3', label: 'Option 3', color: '#f3a536' },
-              { value: '4', label: 'Option 4', color: '#fd7173' }
+              { value: '4', label: 'Option 4', color: '#fd7173' },
+              {
+                value: '5',
+                label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut'
+              }
             ]}
           />
           <p>

@@ -32,6 +32,16 @@ class Select extends Component {
     };
   }
 
+  componentDidMount() {
+    const wrapperEl = this.refs.wrapper;
+
+    // For non-fluid components, just use the initial width
+    const isFluid = (wrapperEl.parentNode.offsetWidth === wrapperEl.offsetWidth);
+    if (!isFluid) {
+      wrapperEl.style.width = `${wrapperEl.offsetWidth}px`;
+    }
+  }
+
   handleClickOutside = () => {
     this.setState({
       highlightedValue: -1,
@@ -181,13 +191,15 @@ class Select extends Component {
   }
 
   renderOptionChildren(option) {
-    const { optionComponent } = this.props;
+    const { optionComponent, classPrefix } = this.props;
+    const props = {
+      className: `${classPrefix}-optionText`,
+      title: option.label
+    };
 
     return optionComponent
-      ? optionComponent(option)
-      : <span title={option.label}>
-          {option.label}
-        </span>;
+      ? optionComponent(option, props)
+      : <span {...props} children={option.label}/>
   }
 
   render() {
@@ -195,7 +207,7 @@ class Select extends Component {
     const { isMenuOpened } = this.state;
 
     return (
-      <div dir="ltr" className={cx(classPrefix, className)} onKeyDown={this.onWrapperKeyDown}>
+      <div ref="wrapper" dir="ltr" className={cx(classPrefix, className)} onKeyDown={this.onWrapperKeyDown}>
         {this.renderSelection()}
         <ul
           id={`${this.id}-results`}
