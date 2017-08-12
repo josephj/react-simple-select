@@ -6,7 +6,7 @@ import '../components/Select/style.css';
 const CustomOption = props => {
   return (
     <span title={props.label}>
-      <span className="CustomSelect-dot" style={{background: props.color}} />
+      <span className="CustomSelect-dot" style={{ background: props.color }} />
       {props.label}
     </span>
   );
@@ -27,6 +27,12 @@ class App extends Component {
 
     return (
       <div className="App">
+        <header>
+          <h1>Code Exercise</h1>
+          <a href="https://bitbucket.org/josephj/morning-eyrie-25991/" rel="noopener noreferrer" target="_blank">
+            View source code on Bitbucket
+          </a>
+        </header>
         <section>
           <label>Default Dropdown</label>
           <Select
@@ -95,6 +101,24 @@ class App extends Component {
             anim id est laborum.
           </p>
         </section>
+        <footer>
+          <ul>
+            <li>
+              <a href="http://career.josephj.com/resume.html" rel="noopener noreferrer" target="_blank">
+                View Joseph's CV
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.evernote.com/shard/s110/sh/5bf88846-b4fd-485f-8366-8f18de27225d/dead9a7857fd5149"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                View Joseph's Portfolio
+              </a>
+            </li>
+          </ul>
+        </footer>
       </div>
     );
   }
