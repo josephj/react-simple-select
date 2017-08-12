@@ -10,8 +10,6 @@ class Select extends Component {
   static propTypes = {
     className: PropTypes.string,
     classPrefix: PropTypes.string,
-    isFocused: PropTypes.bool,
-    isMenuOpened: PropTypes.bool,
     onChange: PropTypes.func,
     optionComponent: PropTypes.func,
     options: PropTypes.array.isRequired,
@@ -19,9 +17,7 @@ class Select extends Component {
   };
 
   static defaultProps = {
-    classPrefix: 'Select',
-    isFocused: false,
-    isMenuOpened: false
+    classPrefix: 'Select'
   };
 
   constructor(props) {
@@ -31,8 +27,8 @@ class Select extends Component {
 
     this.state = {
       highlightedValue: -1,
-      isFocused: props.isFocused,
-      isMenuOpened: props.isMenuOpened
+      isFocused: false,
+      isMenuOpened: false
     };
   }
 
@@ -132,7 +128,7 @@ class Select extends Component {
 
   renderSelection() {
     const id = this.id;
-    const { className, classPrefix, options, value, ...otherProps } = this.props;
+    const { className, classPrefix, options, value, optionComponent, ...otherProps } = this.props; // eslint-disable-line
     const { highlightedValue, isFocused, isMenuOpened } = this.state;
     const selectedOption = _.find(options, { value }) || options[0];
     const ariaProps = {
@@ -162,7 +158,7 @@ class Select extends Component {
     );
   }
 
-  renderOption(option, i) {
+  renderOption(option) {
     const { classPrefix, value } = this.props;
     const { highlightedValue } = this.state;
     const className = cx(`${classPrefix}-option`, {
