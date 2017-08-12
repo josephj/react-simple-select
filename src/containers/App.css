@@ -1,0 +1,16 @@
+.Select {
+  margin-bottom: 10px;
+}
+
+.CustomSelect-dot {
+    border-radius: 50%;
+    display: inline-block;
+    height: 10px;
+    margin-right: 10px;
+    width: 10px;
+}
+
+.FluidSelect {
+  display: block;
+  width: 100%;
+}

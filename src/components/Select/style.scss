@@ -1,7 +1,9 @@
 .Select {
+  color: #777;
   display: inline-block;
   font-size: 12px;
   position: relative;
+
   &-selection {
     border-radius: 4px;
     border: solid 1px #b9c0c5;

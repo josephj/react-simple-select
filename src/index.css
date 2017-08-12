@@ -1,10 +1,40 @@
 body {
-  color: #777;
-  margin: 0;
-  padding: 10px;
-  font-family: "Open Sans", sans-serif;
+  color: #333;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.3;
+  padding: 20px;
+}
+a:link, a:visited {
+  color: #7bbef7;
+  text-decoration: none;
+}
+a:focus {
+  outline: #7bbef7 dotted 1px;
+}
+a:hover {
+  color: #676767;
+}
+h1 {
+  font-weight: bold;
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 label {
   font-weight: bold;
-  font-size: 12px;
+  display: block;
+  margin-bottom: 5px;
+}
+header,
+footer,
+section {
+  margin-bottom: 20px;
+}
+footer {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: dotted 1px #ddd;
+}
+footer li {
+  margin-bottom: 4px;
 }

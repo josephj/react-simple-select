@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import cx from 'classnames';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import _ from 'lodash';
 import enhanceWithClickOutside from 'react-click-outside';
 
@@ -82,80 +82,69 @@ class Select extends Component {
   onWrapperKeyDown = e => {
     const { options, onChange, value } = this.props;
     const { isMenuOpened, highlightedValue } = this.state;
-    let newState = {};
+    const values = options.map(option => option.value);
+    let nextState = {};
 
     switch (e.keyCode) {
       case 9: // Tab
         if (isMenuOpened) {
-          newState = { isMenuOpened: false, isFocused: false, highlightedValue: -1 };
+          nextState = { isMenuOpened: false, isFocused: false, highlightedValue: -1 };
         }
         break;
       case 13: // Enter
         if (isMenuOpened) {
           onChange(highlightedValue);
-          newState = { isMenuOpened: false, isFocused: true, highlightedValue: -1 };
+          nextState = { isMenuOpened: false, isFocused: true, highlightedValue: -1 };
         } else {
-          newState = { isMenuOpened: true, highlightedValue: value };
+          nextState = { isMenuOpened: true, highlightedValue: value };
         }
         break;
-      case 27: // ESC
-        newState = { isMenuOpened: false, isFocused: false };
+      case 27: // Esc
+        nextState = { isMenuOpened: false, isFocused: false };
         break;
       case 38: // Up
         if (isMenuOpened) {
-          const prevIndex = options.map(option => option.value).indexOf(highlightedValue);
+          const prevIndex = values.indexOf(highlightedValue);
           const nextIndex = prevIndex - 1 >= 0 ? prevIndex - 1 : options.length - 1;
-          newState = { highlightedValue: options[nextIndex].value };
+          nextState = { highlightedValue: options[nextIndex].value };
         } else {
-          newState = { isMenuOpened: true, highlightedValue: value };
+          nextState = { isMenuOpened: true, highlightedValue: value };
         }
         break;
       case 40: // Down
         if (isMenuOpened) {
-          const prevIndex = options.map(option => option.value).indexOf(highlightedValue);
+          const prevIndex = values.indexOf(highlightedValue);
           const nextIndex = prevIndex + 1 !== options.length ? prevIndex + 1 : 0;
-          newState = { highlightedValue: options[nextIndex].value };
+          nextState = { highlightedValue: options[nextIndex].value };
         } else {
-          newState = { isMenuOpened: true, highlightedValue: value };
+          nextState = { isMenuOpened: true, highlightedValue: value };
         }
         break;
       default:
-      // ?
+      // Bypass all other keydown events
     }
 
-    if (_.size(newState)) {
-      this.setState(newState);
+    if (_.size(nextState)) {
+      this.setState(nextState);
       e.preventDefault();
     }
   };
 
   renderSelection() {
     const id = this.id;
-    const { classPrefix, options, optionComponent, value } = this.props;
+    const { className, classPrefix, options, value, ...otherProps } = this.props;
     const { highlightedValue, isFocused, isMenuOpened } = this.state;
     const selectedOption = _.find(options, { value }) || options[0];
     const ariaProps = {
       role: 'combobox',
-      'aria-haspopup': true,
-      'aria-expanded': isMenuOpened,
-      'aria-owns': `${id}-results`,
       'aria-controls': `${id}-results`,
-      'aria-labelledby': `${id}-container`
+      'aria-expanded': isMenuOpened,
+      'aria-haspopup': true,
+      'aria-owns': `${id}-results`
     };
 
     if (isMenuOpened) {
       ariaProps['aria-activedescendant'] = `${id}-result-${highlightedValue}`;
-    }
-
-    let children;
-    if (optionComponent) {
-      children = optionComponent(selectedOption);
-    } else {
-      children = (
-        <span title={selectedOption.label} id={`${this.id}-container`}>
-          {selectedOption.label}
-        </span>
-      );
     }
 
     return (
@@ -166,15 +155,15 @@ class Select extends Component {
         onBlur={this.onSelectionBlur}
         onClick={this.onSelectionClick}
         {...ariaProps}
-        children={children}
+        {...otherProps}
+        children={this.renderOptionChildren(selectedOption)}
       />
     );
   }
 
   renderOption(option, i) {
-    const { classPrefix, optionComponent, value } = this.props;
+    const { classPrefix, value } = this.props;
     const { highlightedValue } = this.state;
-    const children = optionComponent ? optionComponent(option) : <span title={option.label}>{option.label}</span>;
     const className = cx(`${classPrefix}-option`, {
       'is-highlighted': option.value === highlightedValue,
       'is-selected': value === option.value
@@ -189,9 +178,19 @@ class Select extends Component {
         aria-selected={value === option.value}
         onClick={this.onOptionClick.bind(this, option.value)}
         onMouseOver={this.onOptionHighlight.bind(this, option.value)}
-        children={children}
+        children={this.renderOptionChildren(option)}
       />
     );
+  }
+
+  renderOptionChildren(option) {
+    const { optionComponent } = this.props;
+
+    return optionComponent
+      ? optionComponent(option)
+      : <span title={option.label}>
+          {option.label}
+        </span>;
   }
 
   render() {
