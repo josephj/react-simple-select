@@ -51,3 +51,32 @@ class App extends Component {
   }
 }
 ```
+
+## Installation
+
+Clone it from GitHub
+
+```
+git clone git@github.com:josephj/react-simple-select.git;
+```
+
+Go into the folder
+
+```
+cd react-simple-react;
+```
+
+Install the packages. You can run `npm install` if you don't have `yarn`.
+
+```
+yarn
+```
+
+Run the web server. You can run `npm start` if you don't have `yarn`.
+
+```
+yarn start
+```
+
+
+
